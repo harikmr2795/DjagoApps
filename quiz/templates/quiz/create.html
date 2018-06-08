@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}"/>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -21,11 +22,127 @@
     <!--</ul>-->
   </div>
 </nav>
-<div class="container-fluid text-center top-buffer">
-    <form id="name" class="form-group">
-        <input type="text" placeholder="Your Name" class="form-control" name="name"><br>
-        <input type="submit" class="btn btn-primary text-center" value="Next" >
-    </form>
+
+<div class="container-fluid text-center top-buffer" id="name_form">
+    <!--<form class="form-group">-->
+    <input type="text" placeholder="Your Name" class="form-control" id="name_box" name="name"><br>
+    <p><span class="emsg hidden">Please enter a valid name</span></p>
+    <input type="submit" class="btn btn-primary text-center" id="name_btn" value="Next">
+    <!--</form>-->
 </div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q1">
+    <p><span>Question 1</span></p>
+    <input type="submit" class="btn btn-success" id="next1" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q2">
+    <p><span>Question 2</span></p>
+    <input type="submit" class="btn btn-success" id="next2" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q3">
+    <p><span>Question 3</span></p>
+    <input type="submit" class="btn btn-success" id="next3" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q4">
+    <p><span>Question 4</span></p>
+    <input type="submit" class="btn btn-success" id="next4" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q5">
+    <p><span>Question 5</span></p>
+    <input type="submit" class="btn btn-success" id="next5" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q6">
+    <p><span>Question 6</span></p>
+    <input type="submit" class="btn btn-success" id="next6" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q7">
+    <p><span>Question 7</span></p>
+    <input type="submit" class="btn btn-success" id="next7" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q8">
+    <p><span>Question 8</span></p>
+    <input type="submit" class="btn btn-success" id="next8" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q9">
+    <p><span>Question 9</span></p>
+    <input type="submit" class="btn btn-success" id="next9" value="Next">
+</div>
+
+<div class="container-fluid text-center top-buffer hidden" id="q10">
+    <p><span>Question 10</span></p>
+    <input type="submit" class="btn btn-success" id="create" value="Share">
+</div>
+
+<script>
+$(document).ready(function(){
+    var $regexname=/^[a-zA-Z][a-zA-Z .]+[a-zA-Z]$/;
+
+    $("#name_btn").click(function(){
+        var name = $('#name_box').val();
+        if (name.match($regexname)) {
+            $("#name_form").hide();
+            $('#q1').removeClass("hidden");
+        }
+        else{
+            $('.emsg').removeClass("hidden");
+        }
+    });
+
+    $("#next1").click(function(){
+        $('#q1').addClass("hidden");
+        $('#q2').removeClass("hidden");
+    });
+
+    $("#next2").click(function(){
+        $('#q2').addClass("hidden");
+        $('#q3').removeClass("hidden");
+    });
+
+    $("#next3").click(function(){
+        $('#q3').addClass("hidden");
+        $('#q4').removeClass("hidden");
+    });
+
+    $("#next4").click(function(){
+        $('#q4').addClass("hidden");
+        $('#q5').removeClass("hidden");
+    });
+
+    $("#next5").click(function(){
+        $('#q5').addClass("hidden");
+        $('#q6').removeClass("hidden");
+    });
+
+    $("#next6").click(function(){
+        $('#q6').addClass("hidden");
+        $('#q7').removeClass("hidden");
+    });
+
+    $("#next7").click(function(){
+        $('#q7').addClass("hidden");
+        $('#q8').removeClass("hidden");
+    });
+
+    $("#next8").click(function(){
+        $('#q8').addClass("hidden");
+        $('#q9').removeClass("hidden");
+    });
+
+    $("#next9").click(function(){
+        $('#q9').addClass("hidden");
+        $('#q10').removeClass("hidden");
+    });
+
+});
+</script>
+
 </body>
 </html>
