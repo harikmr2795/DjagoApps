@@ -1,11 +1,26 @@
+body{
+    background-color: #F4F3F6;
+}
+
 .navbar{
     border-radius: 1px;
 }
 
 .top-buffer{
-    margin-top: 10px;
+    margin-top: 70px;
 }
 
 .emsg{
     color: red;
+}
+
+.active{
+    background-color: #15c377;
+    color: #fff;
+}
+
+label{
+    padding: 7px;
+    border: 0px;
+    margin: 0px;
 }
