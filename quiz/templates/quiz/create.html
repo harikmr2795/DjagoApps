@@ -7,6 +7,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}"/>
+    <script type="text/javascript" src="{% static 'quiz/myscript.js' %}"></script>
 </head>
 <body>
 
@@ -174,73 +175,9 @@
 </div>
 
 <div class="text-center">
-    <input type="submit" class="btn btn-success hidden" id="finish" value="Finish">
+    <input type="submit" class="btn btn-success hidden" id="copy" value="Copy Link">
 </div>
 
 
-<script>
-$(document).ready(function(){
-    var $regexname=/^[a-zA-Z][a-zA-Z .]+[a-zA-Z]$/;
-    var unanswered = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15"];
-    var shifter;
-
-    $('input').click(function () {
-        $('input:not(:checked)').parent().removeClass("active");
-        $('input:checked').parent().addClass("active");
-    });
-
-    $("#name_btn").click(function(){
-        var name = $('#name_box').val();
-        if (name.match($regexname)) {
-            $("#name_form").slideUp(300);
-            $('#q1').removeClass("hidden");
-            $('#skip').removeClass("hidden");
-            $('#qno').removeClass("hidden");
-        }
-        else{
-            $('.emsg').removeClass("hidden").hide().fadeIn(300);
-        }
-    });
-
-    $(".q1").change(next);
-    $(".q2").change(next);
-    $(".q3").change(next);
-    $(".q4").change(next);
-    $(".q5").change(next);
-    $(".q6").change(next);
-    $(".q7").change(next);
-    $(".q8").change(next);
-    $(".q9").change(next);
-    $(".q10").change(next);
-    $(".q11").change(next);
-    $(".q12").change(next);
-    $(".q13").change(next);
-    $(".q14").change(next);
-    $(".q15").change(next);
-
-    $("#skip").click(function(){
-        $('#'+unanswered[0]).addClass('hidden');
-        shifter = unanswered.shift();
-        unanswered = unanswered.concat(shifter);
-        console.log(unanswered);
-        $('#'+unanswered[0]).removeClass('hidden');
-    });
-
-    function next(){
-        $('#'+unanswered[0]).delay(700).slideUp(300);
-        unanswered.shift();
-        if(15-unanswered.length >= 10){
-            $('#skip').addClass("hidden");
-            $('#qno').addClass("hidden");
-            $('#finish').removeClass("hidden");
-            $('#qno').replaceWith('<div class="container-fluid" id="qno"><p><span>Share with friends</span></p></div>');
-        }
-        else{
-            setTimeout(function() { $('#'+unanswered[0]).removeClass("hidden");}, 800);
-            $('#qno').replaceWith('<div class="container-fluid" id="qno"><p><span>Question ' + parseInt(16-unanswered.length) + '/10</span></p></div>');
-        }
-    }
-});
-</script>
 </body>
 </html>
