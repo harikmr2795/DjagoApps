@@ -13,6 +13,9 @@ def create(request):
     template = loader.get_template('quiz/create.html')
     return HttpResponse(template.render(request))
 
+def answer(request, id):
+    return HttpResponse("<h1>" + id + "</h1>")
+
 # class DataList(APIView):
 #     def get(self, request):
 #         datas = Data.objects.all()

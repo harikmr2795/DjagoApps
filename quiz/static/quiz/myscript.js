@@ -2,6 +2,9 @@ $(document).ready(function(){
     var $regexname=/^[a-zA-Z][a-zA-Z .]{0,25}$/;
     var unanswered = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15"];
     var shifter;
+    var url = 'http://127.0.0.1:8000/quiz/add/';
+    var data={};
+    var q = 0; //keeping track of the questions answered
 
     $("#name_btn").click(function(){
         var name = $('#name_box').val();
@@ -10,6 +13,7 @@ $(document).ready(function(){
             $('#q1').removeClass("hidden");
             $('#skip').removeClass("hidden");
             $('#qno').removeClass("hidden");
+            data['name'] = name.trim();
             createCookie("username", name, 100);
         }
         else{
@@ -37,41 +41,20 @@ $(document).ready(function(){
         $('#'+unanswered[0]).addClass('hidden');
         shifter = unanswered.shift();
         unanswered = unanswered.concat(shifter);
-        console.log(unanswered);
         $('#'+unanswered[0]).removeClass('hidden');
     });
 
     function next(){
         $('#'+unanswered[0]).delay(700).slideUp(300);
         unanswered.shift();
+        data['q'+q] = this.name.slice(1);
+        data['a'+q] = this.value;
+        q++;
+        console.log(data);
         if(15-unanswered.length >= 10){
             $('#skip').addClass("hidden");
             $('#qno').addClass("hidden");
-            setTimeout(function() { $('#qno').replaceWith('<div class="container-fluid" id="qno"><p><span>Share with friends</span></p></div>');}, 800);
-            var url = 'http://127.0.0.1:8000/quiz/add/';
-            var data = {
-                        "name": "Harikumar",
-                        "q0": "0",
-                        "q1": "1",
-                        "q2": "2",
-                        "q3": "3",
-                        "q4": "4",
-                        "q5": "5",
-                        "q6": "6",
-                        "q7": "7",
-                        "q8": "8",
-                        "q9": "9",
-                        "a0": "4",
-                        "a1": "1",
-                        "a2": "2",
-                        "a3": "2",
-                        "a4": "3",
-                        "a5": "1",
-                        "a6": "5",
-                        "a7": "2",
-                        "a8": "1",
-                        "a9": "4"
-                    };
+            setTimeout(function() { $('#pageName').replaceWith('<div class="navbar-brand" id="pageName"><p>Share Quiz</p></div>');}, 800);
             fetch(url, {
               method: 'POST',
               body: JSON.stringify(data),
@@ -80,20 +63,20 @@ $(document).ready(function(){
               }
             }).then(res => res.json())
             .catch(error => console.error('Error:', error))
-            .then(response => success());
+            .then(response => success(response));
         }
         else{
             setTimeout(function() { $('#'+unanswered[0]).removeClass("hidden");}, 800);
-            setTimeout(function() { $('#qno').replaceWith('<div class="container-fluid" id="qno"><p><span>Question ' + parseInt(16-unanswered.length) + '/10</span></p></div>');}, 800);
-
+            setTimeout(function() { $('#qno').replaceWith('<div class="navbar-brand pull-right" id="qno"><p>' + parseInt(16-unanswered.length) + '/10</p></div>');}, 800);
         }
     }
 
-    function success(){
-        $('#copy').removeClass("hidden");
+    function success(response){
+        $('#copy_btn').removeClass("hidden");
+        var shareLink = "http://127.0.0.1:8000/quiz/"+response.id;
+        $("<h4>" + shareLink + "</h4>").appendTo("#shareLink");
+        $('<input id="link">').val(shareLink).appendTo('body').select();
     }
-
-
 
 //    For creating, reading, erasing Cookies
     function createCookie(name, value, days) {
@@ -129,3 +112,13 @@ $(document).ready(function(){
     });
 
 });
+
+function copy_share_url(){
+        var el = document.getElementById('link');
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.addRange(range);
+        document.execCommand('copy');
+        alert("Link copied");
+}

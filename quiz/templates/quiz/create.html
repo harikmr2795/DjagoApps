@@ -5,28 +5,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1,  user-scalable=no">
     <link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}"/>
     <script type="text/javascript" src="{% static 'quiz/myscript.js' %}"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Create Quiz</a>
+        <div class="navbar-brand" id="pageName"><p>Create Quiz</p></div>
+        <div class="navbar-brand pull-right hidden" id="qno"><p>1/10</p></div>
     </div>
-    <!--<ul class="nav navbar-nav">-->
-      <!--<li class="active"><a href="#">Home</a></li>-->
-      <!--<li><a href="#">Page 1</a></li>-->
-    <!--</ul>-->
   </div>
 </nav>
-
-<div class="container-fluid hidden" id="qno">
-    <p><span>Question 1/10</span></p>
-</div>
-
 
 <div class="container-fluid text-center" id="name_form">
     <input type="text" placeholder="Your Name" class="form-control top-buffer" id="name_box" name="name"><br>
@@ -174,8 +166,12 @@
     <input type="submit" class="btn btn-primary hidden" id="skip" value="Skip">
 </div>
 
+<div class="text-center" id="shareLink">
+
+</div>
+
 <div class="text-center">
-    <input type="submit" class="btn btn-success hidden" id="copy" value="Copy Link">
+    <input type="submit" onclick="copy_share_url()" class="btn btn-success hidden" id="copy_btn" value="Copy Link">
 </div>
 
 
