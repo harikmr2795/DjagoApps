@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^(?P<id>[0-9]+)/', views.answer),
     url(r'^$', views.create),
     url(r'^view/(?P<pk>[0-9]+)/', views.DataAPI.as_view()),
-    # url(r'^data/', views.DataList.as_view()),
+    url(r'^data/', views.DataList.as_view()),
     url(r'^add/', views.DataAPI.as_view()),
 ]
 

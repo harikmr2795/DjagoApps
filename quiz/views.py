@@ -14,13 +14,15 @@ def create(request):
     return HttpResponse(template.render(request))
 
 def answer(request, id):
-    return HttpResponse("<h1>" + id + "</h1>")
+    context = {'id': id}
+    template = loader.get_template('quiz/answer.html')
+    return HttpResponse(template.render(context, request))
 
-# class DataList(APIView):
-#     def get(self, request):
-#         datas = Data.objects.all()
-#         serializer = DataSerializer(datas, many=True)
-#         return Response(serializer.data)
+class DataList(APIView):
+    def get(self, request):
+        datas = Data.objects.all()
+        serializer = DataSerializer(datas, many=True)
+        return Response(serializer.data)
 
 class DataAPI(APIView):
     def post(self, request):
