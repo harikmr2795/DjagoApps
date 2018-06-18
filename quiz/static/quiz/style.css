@@ -28,6 +28,14 @@ body{
     color: #fff;
 }
 
+.correct{
+    background-color: green;
+}
+
+.wrong{
+    background-color: red;
+}
+
 label{
     padding: 7px 20px;
     border: 0px;

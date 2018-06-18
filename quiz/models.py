@@ -25,3 +25,8 @@ class Data(models.Model):
 
     def __str__(self):
         return self.name
+
+class Score(models.Model):
+    data = models.ForeignKey(Data, on_delete="models.CASCADE")
+    name = models.CharField(max_length=25)
+    score = models.CharField(max_length=2)
